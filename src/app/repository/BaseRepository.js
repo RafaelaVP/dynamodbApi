@@ -8,17 +8,17 @@ class BaseRepository {
       return result;
     }
   
-    async findByParams(search) {
-        const result = await this._schema.findAll(search);
+    async findByParams() {
+        const result = await this._schema.scan().exec();
         return result;
     }
   
     async update(id, payload) {
-      return this._schema.findByIdAndUpdate(id, payload, { new: true });
+      return this._schema.update(id, payload, { new: true });
     }
   
-    async delete(_id) {
-      return this._schema.findByIdAndRemove(_id);
+    async delete(id) {
+      return this._schema.delete(id);
     }
   }
   module.exports = BaseRepository;
